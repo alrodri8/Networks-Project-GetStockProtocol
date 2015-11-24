@@ -4,7 +4,7 @@ import java.util.*;
 
 class UDPServer
 {
-	private static int port = 9001;	// Global variable declaring port number
+	private static int port = 1050;	// Global variable declaring port number
 	
 	public static void main(String args[]) throws Exception
 	{
@@ -61,6 +61,8 @@ class UDPServer
 				System.out.print("Command " + i + ": ");
 				String[] parts = commands[i].split(",");
 				
+				
+				
 				if (parts[0].equals("REG"))
 				{
 					if (!users.contains(parts[1].toUpperCase()))
@@ -83,6 +85,20 @@ class UDPServer
 								port);
 						serverSocket.send(sendPacket);
 					}
+				} else if (parts[0].equals("UNR")){
+					
+					
+				}else if (parts[0].equals("QUO")){
+					
+					
+				}else {
+					sendData = "INC".getBytes();
+					DatagramPacket sendPacket = new DatagramPacket(sendData, 
+							sendData.length, 
+							IPAddress, 
+							port);
+					serverSocket.send(sendPacket);
+					
 				}
 				System.out.println();
 			}

@@ -4,7 +4,7 @@ class UDPClient {
 	public static void main(String args[]) throws Exception    
 	{       
 		
-		//blah
+		
 		//System.out.println("Enter Server IP Address:");
 		//BufferedReader ipReader = new BufferedReader(new InputStreamReader(System.in));
 		//String IP = ipReader.readLine();
@@ -14,15 +14,15 @@ class UDPClient {
 		BufferedReader inFromUser = 
 				new BufferedReader(new InputStreamReader(System.in));
 		DatagramSocket clientSocket = new DatagramSocket();
-		InetAddress IPAddress = InetAddress.getByName("10.226.0.230");
-		//InetAddress IPAddress = InetAddress.getByName("localhost");
+		//InetAddress IPAddress = InetAddress.getByName("10.226.2.87");
+		InetAddress IPAddress = InetAddress.getByName("localhost");
 		//InetAddress IPAddress = InetAddress.getByName(IP);
 		byte[] sendData = new byte[1024];
 		byte[] receiveData = new byte[1024];
 		String sentence = inFromUser.readLine();
 		sendData=null;
 		sendData = sentence.getBytes();
-		DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9001);
+		DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 1050);
 		clientSocket.send(sendPacket);       
 		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 		clientSocket.receive(receivePacket);
