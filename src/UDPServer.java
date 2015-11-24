@@ -67,13 +67,32 @@ class UDPServer
 				{
 					if (!users.contains(parts[1].toUpperCase()))
 					{
-						users.add(parts[1].toUpperCase());
-						System.out.println(users);
-						sendData = "ROK".getBytes();
-						DatagramPacket sendPacket = new DatagramPacket(sendData, 
-								sendData.length, 
-								IPAddress, port);
-						serverSocket.send(sendPacket);
+						if ( (parts[1].matches("[a-z]+")
+								|| parts[1].matches("[A-Z]+")
+								|| parts[1].matches("[0-9]+"))
+								&& parts[1].length() <= 32)
+						{
+							if(users.add(parts[1].toUpperCase())){
+							sendData = "ROK".getBytes();
+							System.out.println("User list after Add:" + users);
+							DatagramPacket sendPacket = new DatagramPacket(sendData, 
+									sendData.length, 
+									IPAddress, port);
+							serverSocket.send(sendPacket);
+							}else{
+								System.out.println("Error adding user to vector!");
+							}
+						}
+						else
+						{
+							sendData = "INU".getBytes();
+							System.out.println("User list after Add:" + users);
+							DatagramPacket sendPacket = new DatagramPacket(sendData, 
+									sendData.length, 
+									IPAddress, port);
+							serverSocket.send(sendPacket);
+
+						}
 					}
 					else
 					{
@@ -86,7 +105,31 @@ class UDPServer
 						serverSocket.send(sendPacket);
 					}
 				} else if (parts[0].equals("UNR")){
-					
+					if(users.contains(parts[1].toUpperCase())){
+						if(users.remove(parts[1].toUpperCase())){
+							
+							System.out.println("User list after unregister:" + users);
+							sendData = "ROK".getBytes();
+							DatagramPacket sendPacket = new DatagramPacket(sendData, 
+									sendData.length, 
+									IPAddress, port);
+							serverSocket.send(sendPacket);
+							
+						}else{
+							
+							System.out.println("Error removing user from vector!");
+							
+						}
+						
+					}else{
+						
+						sendData = "UNR".getBytes();
+						DatagramPacket sendPacket = new DatagramPacket(sendData, 
+								sendData.length, 
+								IPAddress, port);
+						serverSocket.send(sendPacket);
+						
+					}
 					
 				}else if (parts[0].equals("QUO")){
 					
