@@ -120,9 +120,11 @@ class GetStockServer
 	            	else
 	            	{
 	            		String user_name = field[1];
-	            		if (!users.contains(user_name))
-	            		{
+	            		if(!verifyUserName(user_name)){
 	            			sendMessage("INU;", IPAddress, serverSocket, port);
+	            		}else if (!users.contains(user_name))
+	            		{
+	            			sendMessage("UNR;", IPAddress, serverSocket, port);
 	            		}
 	            		else
 	            		{
