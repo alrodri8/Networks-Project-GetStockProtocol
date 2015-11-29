@@ -122,7 +122,7 @@ class GetStockServer
 	            		String user_name = field[1];
 	            		if (!users.contains(user_name))
 	            		{
-	            			sendMessage("UNR;", IPAddress, serverSocket, port);
+	            			sendMessage("INU;", IPAddress, serverSocket, port);
 	            		}
 	            		else
 	            		{

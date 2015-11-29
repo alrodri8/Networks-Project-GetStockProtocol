@@ -8,6 +8,7 @@ class GetStockClient
 	static String TonyIP = "10.224.2.155";	// Anthony USF Wifi 
 	static String CRodIP = "172.20.10.2";	// Christian Hotspot
 	static String VaddIP = "192.168.1.24";	// Vaddanak Hotspot
+	static String Cwifi = "10.226.1.95"; //Christian wifi
 
 	public static void main(String args[]) throws Exception    
 	{
@@ -15,7 +16,7 @@ class GetStockClient
 		
 		while(state)
 		{
-			String ipAddress = localhost;	// choose IP Address from the global variables
+			String ipAddress = Cwifi;	// choose IP Address from the global variables
 			
 			BufferedReader inFromUser = 
 					new BufferedReader(new InputStreamReader(System.in));
@@ -30,6 +31,7 @@ class GetStockClient
 			clientSocket.send(sendPacket);       
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 			clientSocket.receive(receivePacket);
+			
 			String modifiedSentence = new String(receivePacket.getData());
 			System.out.println("Response Message: " + modifiedSentence);
 			
